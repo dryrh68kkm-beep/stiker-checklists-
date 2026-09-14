@@ -95,11 +95,41 @@ const categories = [
       { id: "e08", th: "สนใจพื้นที่เช่า ติดต่อ 065-5257399 ฝ่ายบริหารพื้นที่เช่า", color: "สีเขียว", size: "ตัวอักษร 6 ซม.", qty: 1 },
       { id: "e09", th: "Staff Only", color: "สีขาว", size: "ตัวอักษร 6 ซม.", qty: 1 }
     ]
+  },
+  {
+    id: "departmentSigns",
+    letter: "F",
+    short: "ป้ายหมวดสินค้า",
+    title: "ป้ายหมวดสินค้า ขนาด 100 × 70 ซม.",
+    note: "24 ป้าย · ตามแบบที่แนบ",
+    items: [
+      { id: "f01", th: "SWEETED GROCE.2", en: "SNACKS, CAKES, PIES", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f02", th: "SWEETED GROCE.1", en: "กาแฟ, เครื่องดื่ม", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f03", th: "HOUSEHOLD", en: "กระดาษชำระ, กระดาษทิชชู่", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f04", th: "HBA", en: "สุขภาพและความงาม", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f05", th: "HOL", en: "STATIONERY & ENTERTAINMENT, HOME IMPROVEMENT", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f06", th: "TRANSIT AREA", size: "100 × 70 ซม.", qty: 2 },
+      { id: "f07", th: "SWEETED GROCE.2", en: "BISCUITS / WAFERS, CHOCOLATE, CANDY, JELLY", size: "100 × 70 ซม.", qty: 2 },
+      { id: "f08", th: "HBA", en: "BABY ACCESSORIES, PERSONAL CARE", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f09", th: "HOUSEHOLD", en: "น้ำยาปรับผ้านุ่ม, น้ำยาซักผ้า", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f10", th: "HOUSEHOLD", en: "ผ้าอ้อมเด็ก, ผ้าอ้อมผู้ใหญ่", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f11", th: "HL", en: "SMALL APPLIANCE", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f12", th: "HL", en: "SMALL APPLIANCE, HOME ENTERTAIN", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f13", th: "SL", en: "BABY ACCESSORIES, PERSONAL CARE", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f14", th: "SL", en: "FOOTWEAR", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f15", th: "HOL", en: "HOUSEWARE", size: "100 × 70 ซม.", qty: 2 },
+      { id: "f16", th: "HOL", en: "HOME FURNITURE", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f17", th: "HOL", en: "HOME DÉCOR, RECREATION", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f18", th: "SALTED GROCERY", en: "SEASONINGS, COOKING SAUCES, COOKING OIL", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f19", th: "SALTED GROCERY", en: "NOODLES", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f20", th: "สินค้า", en: "BAS", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f21", th: "HOUSEHOLD", size: "100 × 70 ซม.", qty: 1 }
+    ]
   }
 ];
 
 const STORAGE_KEY = "signStickerChecklist.v1";
-const MAIN_TOTAL = 163;
+const MAIN_TOTAL = 187;
 const mainItems = categories.flatMap(c => c.items);
 const letterItems = categories.find(c => c.id === "letters").items;
 const state = loadState();
@@ -236,7 +266,7 @@ function getCutGroups() {
     }
   }
   const order = [
-    "50 × 50 ซม.", "60 × 60 ซม.", "120 × 70 ซม.", "120 × 80 ซม.",
+    "50 × 50 ซม.", "60 × 60 ซม.", "100 × 70 ซม.", "120 × 70 ซม.", "120 × 80 ซม.",
     "กว้าง 80 ซม. · สูงตามแบบเดิม", "11 × 53 ซม.", "13 × 68 ซม.", "20 × 20 ซม.",
     "ตัวอักษร 8 ซม.", "ตัวอักษร 6 ซม.", "ตัวอักษร 4 ซม."
   ];
@@ -513,7 +543,7 @@ function registerChecklistTools() {
           updates: {
             type: "array",
             minItems: 1,
-            maxItems: 52,
+            maxItems: 73,
             items: {
               type: "object",
               properties: {
@@ -532,8 +562,8 @@ function registerChecklistTools() {
       },
       annotations: { readOnlyHint: false, untrustedContentHint: false },
       execute(input) {
-        if (!input || !Array.isArray(input.updates) || input.updates.length < 1 || input.updates.length > 52) {
-          throw new Error("updates ต้องมี 1–52 รายการ");
+        if (!input || !Array.isArray(input.updates) || input.updates.length < 1 || input.updates.length > 73) {
+          throw new Error("updates ต้องมี 1–73 รายการ");
         }
         const pendingChanges = [];
         for (const update of input.updates) {
