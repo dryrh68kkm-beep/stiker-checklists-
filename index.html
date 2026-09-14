@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#102a43" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="เช็กลิสต์ป้าย" />
+    <meta name="description" content="เช็กลิสต์ติดตามงานป้ายและสติกเกอร์ 163 ชิ้น" />
+    <title>เช็กลิสต์งานป้ายและสติกเกอร์</title>
+    <link rel="icon" type="image/svg+xml" href="app-icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="topbar__inner">
+        <div class="brand">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3l7 7-7 7-7-7 7-7zM12 6v4H9.8l2.2 2.5 2.2-2.5H12v-4M15.5 15.5l1 1 2-2.2"/></svg>
+          </span>
+          <div>
+            <h1>งานป้ายและสติกเกอร์</h1>
+            <p id="saveStatus">พร้อมใช้งาน</p>
+          </div>
+        </div>
+        <div class="topbar__actions">
+          <button class="icon-button" id="printBtn" type="button" aria-label="พิมพ์เช็กลิสต์" title="พิมพ์เช็กลิสต์">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 8V3h10v5M7 17H4V9h16v8h-3M7 14h10v7H7zM17 11h.01"/></svg>
+          </button>
+          <button class="secondary-button" id="resetBtn" type="button">ล้างสถานะ</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="overview" aria-labelledby="overviewTitle">
+        <div class="overview__main">
+          <div class="progress-ring" id="progressRing" aria-hidden="true">
+            <div><strong id="progressPercent">0%</strong><span>สำเร็จ</span></div>
+          </div>
+          <div class="overview__copy">
+            <p class="eyebrow" id="overviewTitle">ภาพรวมชิ้นงานหลัก</p>
+            <h2><span id="donePieces">0</span> <small>/ 163 ชิ้น</small></h2>
+            <p>เช็กตามจำนวนที่ทำเสร็จจริง ระบบบันทึกให้อัตโนมัติในเครื่องนี้</p>
+          </div>
+        </div>
+        <div class="overview__stats">
+          <div class="mini-stat"><span>คงเหลือ</span><strong id="remainingPieces">163</strong><small>ชิ้น</small></div>
+          <div class="mini-stat"><span>รายการหลัก</span><strong id="doneMainItems">0/52</strong><small>รายการ</small></div>
+          <div class="mini-stat mini-stat--pending"><span>งาน C.10</span><strong id="doneLetterItems">0/9</strong><small>ชิ้น</small></div>
+        </div>
+        <div class="overview__bar" aria-label="ความคืบหน้ารวม"><span id="progressBar"></span></div>
+      </section>
+
+      <section class="toolbar" aria-label="ค้นหาและกรองรายการ">
+        <label class="search-box">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          <span class="sr-only">ค้นหารายการ</span>
+          <input id="searchInput" type="search" placeholder="ค้นหาชื่อป้าย ขนาด หรือข้อความ…" autocomplete="off" />
+          <button id="clearSearch" type="button" aria-label="ล้างคำค้นหา" hidden>×</button>
+        </label>
+        <div class="status-filter" role="group" aria-label="กรองตามสถานะ">
+          <button class="is-active" type="button" data-status="all">ทั้งหมด</button>
+          <button type="button" data-status="pending">ยังไม่ครบ</button>
+          <button type="button" data-status="done">เสร็จแล้ว</button>
+        </div>
+        <button class="secondary-button cut-list-button" id="cutListBtn" type="button" aria-expanded="false">
+          ตัดตามขนาด
+        </button>
+      </section>
+
+      <nav class="category-tabs" id="categoryTabs" aria-label="เลือกหมวดงาน"></nav>
+
+      <div class="result-line">
+        <p id="resultCount">กำลังแสดงทั้งหมด</p>
+        <p><span class="save-dot" aria-hidden="true"></span> บันทึกอัตโนมัติ</p>
+      </div>
+
+      <section class="cut-plan" id="cutPlan" hidden aria-labelledby="cutPlanTitle">
+        <div class="cut-plan__heading">
+          <div>
+            <p class="eyebrow">รายการผลิต</p>
+            <h2 id="cutPlanTitle">ต้องตัดตามขนาด</h2>
+          </div>
+          <p>ติ๊กเพื่อยืนยันว่าตัดครบตามขนาดนั้นแล้ว</p>
+        </div>
+        <div class="cut-kpis" aria-label="สรุปงานตัด">
+          <div class="cut-kpi">
+            <span>งานตัดทั้งหมด</span>
+            <strong id="cutTotalPieces">163</strong>
+            <small>ชิ้น</small>
+          </div>
+          <div class="cut-kpi cut-kpi--done">
+            <span>ตัดแล้ว</span>
+            <strong id="cutDonePieces">0</strong>
+            <small>ชิ้น</small>
+          </div>
+          <div class="cut-kpi">
+            <span>คงเหลือ</span>
+            <strong id="cutRemainingPieces">163</strong>
+            <small>ชิ้น</small>
+          </div>
+        </div>
+        <div class="cut-plan__list" id="cutPlanList"></div>
+      </section>
+
+      <div id="checklist" class="checklist" aria-live="polite"></div>
+
+      <section class="reference-card">
+        <details>
+          <summary>
+            <span>สรุปป้ายจราจรตามขนาด</span>
+            <small>รวม 72 ป้าย</small>
+          </summary>
+          <div class="reference-grid">
+            <p><span>50 × 50 ซม.</span><strong>18 ป้าย</strong></p>
+            <p><span>60 × 60 ซม.</span><strong>26 ป้าย</strong></p>
+            <p><span>120 × 70 ซม.</span><strong>2 ป้าย</strong></p>
+            <p><span>120 × 80 ซม.</span><strong>1 ป้าย</strong></p>
+            <p><span>กว้าง 80 ซม. สูงตามแบบเดิม</span><strong>25 ป้าย</strong></p>
+          </div>
+        </details>
+      </section>
+    </main>
+
+    <dialog id="resetDialog" class="confirm-dialog">
+      <form method="dialog">
+        <div class="dialog-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.2 4.5L2.6 18a2 2 0 001.75 3h15.3a2 2 0 001.75-3L13.8 4.5a2 2 0 00-3.6 0z"/></svg>
+        </div>
+        <h2>ล้างสถานะทั้งหมด?</h2>
+        <p>จำนวนที่ทำเสร็จและจำนวนชุดที่กรอกไว้จะกลับเป็นศูนย์ การดำเนินการนี้ย้อนกลับไม่ได้</p>
+        <div class="dialog-actions">
+          <button class="secondary-button" value="cancel">ยกเลิก</button>
+          <button class="danger-button" id="confirmReset" value="confirm">ล้างสถานะ</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">บันทึกแล้ว</div>
+    <script src="app.js"></script>
+  </body>
+</html>
