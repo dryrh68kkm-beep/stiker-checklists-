@@ -110,7 +110,7 @@ const categories = [
       { id: "f05", th: "HOL", en: "STATIONERY & ENTERTAINMENT, HOME IMPROVEMENT", size: "100 × 70 ซม.", qty: 1 },
       { id: "f06", th: "TRANSIT AREA", size: "100 × 70 ซม.", qty: 2 },
       { id: "f07", th: "SWEETED GROCE.2", en: "BISCUITS / WAFERS, CHOCOLATE, CANDY, JELLY", size: "100 × 70 ซม.", qty: 2 },
-      { id: "f08", th: "HBA", en: "BABY ACCESSORIES, PERSONAL CARE", size: "100 × 70 ซม.", qty: 1 },
+      { id: "f08", th: "HBA", size: "100 × 70 ซม.", qty: 1 },
       { id: "f09", th: "HOUSEHOLD", en: "น้ำยาปรับผ้านุ่ม, น้ำยาซักผ้า", size: "100 × 70 ซม.", qty: 1 },
       { id: "f10", th: "HOUSEHOLD", en: "ผ้าอ้อมเด็ก, ผ้าอ้อมผู้ใหญ่", size: "100 × 70 ซม.", qty: 1 },
       { id: "f11", th: "HL", en: "SMALL APPLIANCE", size: "100 × 70 ซม.", qty: 1 },
