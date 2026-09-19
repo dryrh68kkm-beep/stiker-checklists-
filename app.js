@@ -125,11 +125,29 @@ const categories = [
       { id: "f20", th: "สินค้า", en: "BAS", size: "100 × 70 ซม.", qty: 1 },
       { id: "f21", th: "HOUSEHOLD", size: "100 × 70 ซม.", qty: 1 }
     ]
+  },
+  {
+    id: "lockupSigns",
+    letter: "G",
+    short: "ป้ายห้องเก็บสินค้า",
+    title: "ป้ายห้องเก็บสินค้า ขนาด 45 × 15 ซม.",
+    note: "9 ป้าย · ตามแบบที่แนบ",
+    items: [
+      { id: "g01", th: "ห้องเก็บเอกสาร บัญชี / ห้องเก็บแอลกอฮอล์", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g02", th: "LOCKUP LIQUOR &", size: "45 × 15 ซม.", qty: 1, note: "ข้อความภาษาไทยท้ายคำตามแบบ" },
+      { id: "g03", th: "ห้องเก็บสินค้าของแผนก", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g04", th: "LOCKUP PREMIUM", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g05", th: "ห้องเก็บสินค้า REPACK", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g06", th: "LOCKUP PRUE", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g07", th: "ห้องเก็บ FIXTURE", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g08", th: "ห้องเก็บอุปกรณ์ FRESH FOOD", size: "45 × 15 ซม.", qty: 1 },
+      { id: "g09", th: "ห้องเก็บสินค้า SHOPPING ONLINE", size: "45 × 15 ซม.", qty: 1 }
+    ]
   }
 ];
 
 const STORAGE_KEY = "signStickerChecklist.v1";
-const MAIN_TOTAL = 187;
+const MAIN_TOTAL = 196;
 const mainItems = categories.flatMap(c => c.items);
 const letterItems = categories.find(c => c.id === "letters").items;
 const state = loadState();
@@ -266,7 +284,7 @@ function getCutGroups() {
     }
   }
   const order = [
-    "50 × 50 ซม.", "60 × 60 ซม.", "100 × 70 ซม.", "120 × 70 ซม.", "120 × 80 ซม.",
+    "45 × 15 ซม.", "50 × 50 ซม.", "60 × 60 ซม.", "100 × 70 ซม.", "120 × 70 ซม.", "120 × 80 ซม.",
     "กว้าง 80 ซม. · สูงตามแบบเดิม", "11 × 53 ซม.", "13 × 68 ซม.", "20 × 20 ซม.",
     "ตัวอักษร 8 ซม.", "ตัวอักษร 6 ซม.", "ตัวอักษร 4 ซม."
   ];
@@ -543,7 +561,7 @@ function registerChecklistTools() {
           updates: {
             type: "array",
             minItems: 1,
-            maxItems: 73,
+            maxItems: 82,
             items: {
               type: "object",
               properties: {
@@ -562,8 +580,8 @@ function registerChecklistTools() {
       },
       annotations: { readOnlyHint: false, untrustedContentHint: false },
       execute(input) {
-        if (!input || !Array.isArray(input.updates) || input.updates.length < 1 || input.updates.length > 73) {
-          throw new Error("updates ต้องมี 1–73 รายการ");
+        if (!input || !Array.isArray(input.updates) || input.updates.length < 1 || input.updates.length > 82) {
+          throw new Error("updates ต้องมี 1–82 รายการ");
         }
         const pendingChanges = [];
         for (const update of input.updates) {
